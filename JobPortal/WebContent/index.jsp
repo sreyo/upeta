@@ -55,7 +55,7 @@ $(document).ready(function(){
  var dob      = $('#dob').val();
 
 var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +image +"&dob="  +dob;
-//alert(data);
+alert(data);
 
 if(image!=""&fname!=""&& lname!="" && email!="" && phone!="" && city!=""&& state!=""&& country!=""&& zip!=""&& address!=""&& dob!=""&& gender!=""){
  
