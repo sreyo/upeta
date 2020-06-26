@@ -88,6 +88,7 @@ $("#btn_login").click(function() {
 	 var user   = $('#usrname').val();
 	 var pswd   = $('#psw').val();
 	 var host = $(location).attr('host') ;
+	 alert(host);
     $.ajax({
 		url: "LoginServlet",
 		type: "POST",
