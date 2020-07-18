@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -68,6 +72,17 @@ public class duptestservlet extends HttpServlet {
 			List items = upload.parseRequest(request);
 			Iterator iter = items.iterator();
 			response.setContentType("text/html");
+		    ServletContext context = request.getServletContext();
+		    String appPath = context.getRealPath("");
+		    String rpath = "WEB-INF\\resume";
+		    		//+ "";
+			/*
+			 * System.out.println(rpath);
+			 */	    
+		    String path = appPath + rpath;
+			/*
+			 * System.out.println(path);
+			 */
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
 				if (item.isFormField()) {
@@ -76,12 +91,16 @@ public class duptestservlet extends HttpServlet {
 	    			System.out.println(formField[i]);
 
 				} else {
-					File disk = new File("D:\\upload\\"+item.getName());
-					
+					/*
+					 * File disk = new File("D:\\upload\\"+item.getName());
+					 */	
+					File disk = new File(path+"\\"+item.getName());
+
 					item.write(disk);
 					namefile = item.getName();
-				    ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
+				   // ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
 				   // InputStream inputStream = new FileInputStream(disk);
+					ext = FilenameUtils.getExtension(path+"\\"+item.getName());
 
 					System.out.println(ext);	
 					}
@@ -100,26 +119,68 @@ public class duptestservlet extends HttpServlet {
 			s.setCountry(formField[11]);
 			s.setCreatedby(formField[3]);
 			s.setEmail(formField[3]);
-	        HttpSession session = request.getSession(true);
-	        String hostname = (String) session.getAttribute("host");
-	        System.out.println("hostname"+hostname);
-
-			int status = SeekerDao.save(s,hostname);
+            final String host = formField[12];
+            final PrintWriter outp = response.getWriter();
+            int status = SeekerDao.save(s,host);
 			Resume r = new Resume();
 			r.setFilename(namefile);
 			r.setFileextn(ext);
 			r.setUsername(formField[3]);
-			int attach = ResumeDao.save(r,hostname);
+			int attach = ResumeDao.save(r,host);
             
 			if (status > 0) {			
 				if(attach>0) {
-				response.getWriter().write("success");
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+					
+                    final String val = "Registered !!!!!Please Login";
+                    outp.println("<!DOCTYPE html>");
+                    outp.println("<html>");
+                    outp.println("<head>");
+                    outp.println("<title>Registration Servlet</title>");
+                    outp.println("</head>");
+                    outp.println("<body onLoad=\"showResult();\">");
+                    outp.println("<script>");
+                    outp.println("function showResult(){");
+                    outp.println("alert(\"" + val + "\")");
+                    outp.println("}");
+                    outp.println("</script>");
+                    outp.println("</body>");
+                    outp.println("</html>");
+                    request.getRequestDispatcher("/index.jsp").include((ServletRequest)request, (ServletResponse)response);
 
-			} else {
-				response.getWriter().write("failed upload");
+                }else {
+                    final String val = "Failed upload";
+                    outp.println("<!DOCTYPE html>");
+                    outp.println("<html>");
+                    outp.println("<head>");
+                    outp.println("<title>Registration Servlet</title>");
+                    outp.println("</head>");
+                    outp.println("<body onLoad=\"showResult();\">");
+                    outp.println("<script>");
+                    outp.println("function showResult(){");
+                    outp.println("alert(\"" + val + "\")");
+                    outp.println("}");
+                    outp.println("</script>");
+                    outp.println("</body>");
+                    outp.println("</html>");
+                    request.getRequestDispatcher("/index.jsp").include((ServletRequest)request, (ServletResponse)response);
+
+
 			}}else {
-				response.getWriter().write("failed");
+				 final String val = "Something went wrong";
+                 outp.println("<!DOCTYPE html>");
+                 outp.println("<html>");
+                 outp.println("<head>");
+                 outp.println("<title>Registration Servlet</title>");
+                 outp.println("</head>");
+                 outp.println("<body onLoad=\"showResult();\">");
+                 outp.println("<script>");
+                 outp.println("function showResult(){");
+                 outp.println("alert(\"" + val + "\")");
+                 outp.println("}");
+                 outp.println("</script>");
+                 outp.println("</body>");
+                 outp.println("</html>");
+                 request.getRequestDispatcher("/index.jsp").include((ServletRequest)request, (ServletResponse)response);
 
 			}
 	

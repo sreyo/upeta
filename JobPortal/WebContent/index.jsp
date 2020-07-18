@@ -2,10 +2,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>SMART JobBoard</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
 <link rel="stylesheet" src="/WEB-INF/css/styles.css">
 
 <style type="text/css">
@@ -31,10 +33,75 @@
    
 </style>
 <script>
-
 $(document).ready(function(){
+	
+	$('#modalRegisterForm').on('loaded.bs.modal', function (e) {alert("hai");})
+
+$("#btn-add").click(function() {
+	 var host = $(location).attr('href') ;
+	 var res = host.split("=");
+     //$('#hostname').val(res[1]);
+     $('#hostname').val("dev");
+
+	   $("#seeker_form").validate({
+		      rules: {
+		          fname: { minlength: 3,
+		                   required: true
+				  },
+		          lname: {required: true},
+		          email: {
+		             required: true,
+		             email: true,//add an email rule that will ensure the value entered is valid email id.
+		             maxlength: 255,
+		          },
+		          phone: {
+		                required: true,
+		                minlength: 10,
+		                maxlength: 13,
+		                digits: true
+		            },
+		          address: {
+		                required: true,
+		                minlength: 10,
+		            },
+
+
+		       },        highlight: function(element) {
+		            $(element).closest('.form-group').addClass('has-error');
+		        },
+		        unhighlight: function(element) {
+		            $(element).closest('.form-group').removeClass('has-error');
+		        },
+		        errorElement: 'span',
+		        errorClass: 'help-block',
+		        errorPlacement: function(error, element) {
+		            if(element.parent('.input-group').length) {
+		                error.insertAfter(element.parent());
+		            } else {
+		                error.insertAfter(element);
+		            },
+
+		       messages: {
+		    	    fname: 'This field is required',
+		    	    lname: 'This field is required',
+		    	    email: 'Enter a valid email',
+		    	    phone: 'Enter valid phone number'
+		     },
+		        submitHandler: function(form) {
+		            form.submit();
+		        }
+
+		    });
+		 });
+
+
+/* }) */;
 	//getting current url 
-	var currLoc = $(location).attr('href'); 
+	 var currLoc = $(location).attr('href'); 
+	 var host = $(location).attr('href') ;
+	 var res = host.split("=");
+     //$('#hostname').val(res[1]);
+     $('#hostname').val("dev");
 
 	
 // Add the following code if you want the name of the file appear on select
@@ -46,17 +113,18 @@ $(document).ready(function(){
   $("#myBtn").click(function(){
     $("#myModal").modal();
    });
+// form validation
 
-  $("#btn-add1").click(function() {
+ $("#btn-add1").click(function() {
  var image = $('input[type=file]').val().split('\\').pop();
 
  var gender   = $('#gender').val();
  var address  = $('#address').val();	
  var dob      = $('#dob').val();
 
-var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +image +"&dob="  +dob;
-alert(data);
-
+ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +image +"&dob="  +dob;
+/* alert(data);
+ */
 if(image!=""&fname!=""&& lname!="" && email!="" && phone!="" && city!=""&& state!=""&& country!=""&& zip!=""&& address!=""&& dob!=""&& gender!=""){
  
 	$.ajax({
@@ -87,12 +155,15 @@ if(image!=""&fname!=""&& lname!="" && email!="" && phone!="" && city!=""&& state
 $("#btn_login").click(function() {
 	 var user   = $('#usrname').val();
 	 var pswd   = $('#psw').val();
-	 var host = $(location).attr('host') ;
-	 alert(host);
+	 var host   = $(location).attr('href') ;
+	 var res = host.split("=");
+   // $('#hostname').val("example");
+   //  $.session.set("domain","example");
+	 //var host = $(location).attr('host') ;
     $.ajax({
 		url: "LoginServlet",
 		type: "POST",
-		data:{ usr:user, pasw:pswd, host:host },
+		data:{ usr:user, pasw:pswd, host: "dev" },
 		cache: false,
 		success : function(data){
 		if($.trim(data) == "superadmin") {
@@ -102,7 +173,8 @@ $("#btn_login").click(function() {
 		}else if($.trim(data) == "user") {
 	        window.location.replace("userdashboard.jsp");
 		}else if($.trim(data) == "index") {
-	        window.location.replace("index.jsp");
+/* 	        window.location.replace("index.jsp?domain="+res[1]);
+ */         window.location.replace("index.jsp");   
         }else if($.trim(data) == "home") {
         	alert("Wrong username or password..Try again...");
 	        window.location.replace("index.jsp");
@@ -173,10 +245,7 @@ $("#btn_login").click(function() {
 									</div>
 									
 									<input type="button" id="btn_login" class="btn btn-info btn-block" value="login">
-<!-- 									<button type="submit" id="btn_login" class="btn btn-info btn-block">
-										<span class="glyphicon glyphicon-off"></span> Login
-									</button>
- -->								</form>
+								</form>
 							</div>
 							<div class="modal-footer">
 								<!-- 			          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
@@ -238,7 +307,13 @@ $("#btn_login").click(function() {
 														<div class="form-group col-sm-4">
 															<input type="email" id="email" name="email"
 																class="form-control" placeholder="Email " required>
-														</div>
+														
+<!--    <input type="text" class="input-group form-control" placeholder="email" aria-label="email" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <input type="button" class="input-group-text" id="emailchk" value="check">
+  </div>
+ --> 
+ </div>
 														<div class=clearfix></div>
 														<div class="form-group  col-sm-4">
 															<input type="phone" id="phone" name="phone"
@@ -295,6 +370,8 @@ $("#btn_login").click(function() {
 															</select>
 														</div>
 														<div class=clearfix></div>
+														 	<div class="form-group col-sm-12">
+														 	<input type="hidden" id="hostname" name="hostname" class="form-control" ></div>
 
 														<div class="form-group col-sm-12">
 														
@@ -360,13 +437,16 @@ $("#btn_login").click(function() {
 						<h2 class="lead">Most Versatile Job Board Theme Ever!</h2>
 						<ul class="media-list">
 							<li class="media"><a class="media-left" href="#"> <span
-									class="glyphicon glyphicon-cloud icon text-success"></span>
+									class="text-success"></span>
 							</a>
 								<div class="media-body">
-									<!--                                   <h3 class="media-heading">Praesent porttitor urna ut enim.</h3>
--->
-						<p>Maecenas vitae ex iaculis, efficitur est eu, fermentum
-							quam.</p>
+					  <span class="input-group-btn">
+							<div class="input-group">
+
+								<a href="${pageContext.request.contextPath}/Searchopening.jsp" class="btn btn-info btn-rounded mb-4">
+									Search Job</a>
+						</span>
+					</div>
 					</div></li>
 				<li class="media"><a class="media-left" href="#"> <span
 						class="glyphicon glyphicon-lock icon text-success"></span>

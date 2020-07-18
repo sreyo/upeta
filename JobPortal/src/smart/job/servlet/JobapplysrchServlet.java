@@ -53,7 +53,7 @@ public class JobapplysrchServlet extends HttpServlet {
             System.out.println(seekerJsonObject);
 
 	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	        String json2 = gson.toJson(seekerJsonObject);  System.out.println("json"+json2.toString());          
+	        String json2 = gson.toJson(seekerJsonObject);            
 	        out.print(json2);
 
 

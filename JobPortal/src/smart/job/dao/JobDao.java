@@ -254,9 +254,8 @@ public class JobDao implements DBconnect {
 	    try{  
 	        Connection con = DBconnect.initializeDatabase(hostname); 
 	        PreparedStatement ps=con.prepareStatement("DELETE FROM job_posting WHERE jobcode=?");  
-	        ps.setString(1,jobcode);  System.out.println(ps);
+	        ps.setString(1,jobcode);  
 	        status=ps.executeUpdate();  
-	        System.out.println(status);
 	        con.close();  
 	    }catch(Exception e){e.printStackTrace();}  
 	      
@@ -300,7 +299,42 @@ public class JobDao implements DBconnect {
 		}
 
 		return list;
-	}  
+	}
+
+	public static List<Job> searchJob(String job, String place, String hostname) {
+		// TODO Auto-generated method stub
+        List<Job> list=new ArrayList<Job>();  
+        
+        try{  
+            Connection con = DBconnect.initializeDatabase(hostname); 
+            PreparedStatement ps=con.prepareStatement("SELECT * FROM job_posting jp WHERE jp.jobtitle like ? AND jp.city like ?");  
+            ps.setString(1, "%" + job + "%");  
+            ps.setString(2, "%" + place + "%");
+            //System.out.println("dao sql"+ps);
+            ResultSet rs=ps.executeQuery();  
+            while(rs.next()){  
+                Job o=new Job();  
+				o.setjobcode(rs.getString(2));
+				o.setjobtitle(rs.getString(3)); 
+                o.setremotejob(rs.getString(4));
+                o.setCountry(rs.getString(5));
+                o.setState(rs.getString(6));
+                o.setCity(rs.getString(7));
+                o.setZip(rs.getString(8));
+                o.setPhone(rs.getString(9));
+                o.setjobstatus(rs.getString(10));
+                o.setjobtype(rs.getString(11)); 
+                o.setEmail(rs.getString(15));
+                o.setEditor(rs.getString(16));
+                list.add(o);  
+
+            }  
+            con.close();  
+        }catch(Exception e){e.printStackTrace();}  
+          
+        return list;  
+	}
+
 
     
 }

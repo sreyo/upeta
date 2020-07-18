@@ -13,7 +13,6 @@ public interface DBconnect {
 
 	public static String[] dbDetails(String hostname ) {
 		//final String hname = LoginServlet.hostname;
-
         String dbDriver = "org.mariadb.jdbc.Driver"; 
         String dbURL = "jdbc:mariadb://207.246.241.5:3306/"; 
         // Database name to access 
@@ -22,16 +21,17 @@ public interface DBconnect {
         String dbPassword = "Sreyo123"; 
         String dbdetails[] =new String[5];
         int i=0;
+        System.out.println(hostname);
         try {
 			Class.forName(dbDriver);
 	        try {
 				Connection con = DriverManager.getConnection(dbURL+dbName, dbUsername, dbPassword);
-	            PreparedStatement ps=con.prepareStatement("SELECT * FROM db_alloc where hostname =?");  
+	            PreparedStatement ps=con.prepareStatement("SELECT * FROM db_alloc where domain =?");  
 	            ps.setString(1,hostname);  
 	            ResultSet rs=ps.executeQuery();  
 	            while(rs.next()){  
 	            dbdetails[0] = rs.getString(2);
-	            dbdetails[1] = rs.getString(7);
+	            dbdetails[1] = rs.getString(8);
 	            dbdetails[2] = rs.getString(3);
 	            dbdetails[3] = rs.getString(4);
 	            dbdetails[4] = rs.getString(5);
@@ -49,9 +49,6 @@ public interface DBconnect {
 			e.printStackTrace();
 		} 
 
-		
-		
-		
 		return dbdetails;
 		
 	}
@@ -66,7 +63,6 @@ public interface DBconnect {
 		  String dbName = connDetails[2];
 		  String dbUsername = connDetails[3];
 		  String dbPassword = connDetails[4];
-		 	  
 	        //Class.forName("dbDriver"); 
           Class.forName("org.mariadb.jdbc.Driver");  
 

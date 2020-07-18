@@ -3,14 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-
-
-<!-- Bootstrap core JavaScript-->
-
 <!-- Page level plugin JavaScript-->
 <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
 
@@ -25,13 +19,15 @@ tfoot input {
     }
 </style>
 <script>
-/* $(document).on('click','#jobapply',function() {
-	alert("here");
-    var sesid = $('#idses').val();
-
+ $(document).on('click','#cancel',function() {
+	$('#JobModal form')[0]. reset();
+	window.top.location.reload(); 
 });
- */
+ 
+ 
+
  $(document).on('click','#view',function() {
+	 
 	var jobcode = $(this).attr("data-id"); 
     var sesid = $('#idses').val();
 
@@ -68,7 +64,7 @@ tfoot input {
 		$('#editor').html($(editor).text());
 		if(typeof name !== "undefined")
 		{
-	    $('#panel').append(' <div class="form-group col-sm-3" ><input type="checkbox" id='+id+' name="myCheckbox"  /><label>'+name+'</label>');}
+	    $('#panel').append(' <div class="form-group col-sm-3" ><input type="checkbox" id='+id+' value="" name="myCheckbox"  /><label>'+name+'</label>');}
 //<li class="list-group-item"><label for="checkbox"> '+name+'</label>   </li>');
 
 		}
@@ -106,11 +102,13 @@ tfoot input {
                         "type":"GET"
                      },
                      "columnDefs": [{
-                         "targets": -1,
-/*                          "data": "dataSrc",  
- */                       "render": function (data, type, full, meta) {
-                             return "<a type='button' id='view' class='glyphicon glyphicon-file' data-toggle='modal'  data-backdrop='static' data-keyboard='false' data-id=\"" + full[0] + "\" data-target='#JobModal'>  </a>";
-                         }
+                         "targets": 4,
+                          "data" :"dataSrc",
+                          "render": function (data, type, full, meta){
+                            return "<a type='button' id='view' class='glyphicon glyphicon-file' data-toggle='modal'  data-backdrop='static' data-keyboard='false' data-id=\"" + full.jobcode + "\" data-target='#JobModal'>  </a>";
+    // return "<a href='${pageContext.request.contextPath}/jobdetails.jsp'  class='glyphicon glyphicon-file' data-id=\"" + full[0] + "\" >  </a>";
+
+ 						}
 
                         // "defaultContent": "<a type='button' class='btn btn-info' data-toggle='modal' data-id = 'data[0]' data-target='#JobModal'><span class='glyphicon glyphicon-file'></span> view</a>"
                         // "defaultContent": '<a type="button" class="btn btn-primary"  data-toggle="modal" data-target="#JobModal"  onclick="applyjob(data[0])"> <span class="glyphicon glyphicon-edit"></span>Edit</a> / <a href="" class=class="btn btn-danger">Delete</a>'
@@ -225,12 +223,11 @@ tfoot input {
     </table>
     	<div id="JobModal" class="modal fade">
 		<div class="modal-dialog lg addmember">
-		<form action="ApplicationServlet" role="form" enctype="multipart/form-data" method="post">
+		<form action="ApplicationServlet" role="form" id="rform"enctype="multipart/form-data" method="post">
 		
 			<div class="modal-content">
 			<div class="modal-header">
 			<h4 class="modal-title">Apply for JOB</h4>
-			<button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
 			</div>
 			<div class="modal-body">
 			
@@ -281,7 +278,7 @@ tfoot input {
 
 					
 					<div class="modal-footer">
-						<input	type="button" class="btn btn-danger" data-dismiss="modal" value="Cancel"/>
+						<input	type="button" class="btn btn-danger" data-dismiss="modal" id="cancel" value="Cancel"/>
 						<input type="submit" class="btn btn-info" id="jobapply" name="jobapply" value="Apply"/>
 					</div>
 			</div>			

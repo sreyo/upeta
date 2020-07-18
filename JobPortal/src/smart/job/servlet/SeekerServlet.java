@@ -116,8 +116,6 @@ public class SeekerServlet extends HttpServlet {
 		//s.setUpload(name);
         HttpSession session = request.getSession(true);
         String hostname = (String) session.getAttribute("host");
-        System.out.println("hostname"+hostname);
-
 		int status = SeekerDao.save(s,hostname);
 		if (status > 0) {
 			response.setContentType("text/html");

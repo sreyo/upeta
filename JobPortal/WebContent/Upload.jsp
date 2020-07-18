@@ -9,6 +9,34 @@
  <style><%@include file="/WEB-INF/css/resume.css"%></style>
 
 <script type="text/javascript">
+$(document).on("click", ".delete", function() { 
+	
+	var id=$(this).attr("data-id");
+	$('#id_d').val(id);
+	
+	
+});
+
+$(document).on("click", "#delete", function() { 
+	$.ajax({
+		url: "DelresumeServlet",
+		type: "POST",
+		cache: false,
+		data:{
+			id: $("#id_d").val()
+		},
+		success: function(data){
+		if($.trim(data) == "success") {
+				$('#deleteJobModal').modal('hide');
+				$("#"+data).remove();
+                location.reload();						
+		}
+
+		
+		}
+	});
+});
+
 $(window).load(function() {
 
     var sesid = $('#idses').val();
@@ -26,8 +54,8 @@ $(window).load(function() {
 			   function DoPost(){
 				      $.post("download1.jsp", { resume: name } );  //Your values here..
 				   }
-
-			   $('#panel').append(' <ul class="list-group1"> <li class="list-group-item"><div class="checkbox" <label for="checkbox"> '+name+'</label> </div>    <div class="pull-right action-buttons"><a href="${pageContext.request.contextPath}/ResumedeleteServlet" data-id="+'id+'"class="trash"><span class="glyphicon glyphicon-trash"></span></a><a href="download1.jsp?filename='+name+'"  class="flag"><span class="glyphicon glyphicon-download"></span></a> </div></li></ul>');
+                                                                                                                                                                                                                                                                                                   
+			   $('#panel').append(' <ul class="list-group1"> <li class="list-group-item"><div class="checkbox" <label for="checkbox"> '+name+'</label> </div>    <div class="pull-right action-buttons"><a type="button" id"view" data-toggle="modal" class="delete"   data-backdrop="static" data-keyboard="false"  data-target="#deleteJobModal" data-id="'+id+'" class="trash"><span class="glyphicon glyphicon-trash"></span></a><a href="download1.jsp?filename='+name+'"  class="flag"><span class="glyphicon glyphicon-download"></span></a> </div></li></ul>');
               }
  	}
 		
@@ -73,5 +101,35 @@ $(window).load(function() {
                     </div>
                 </div>
             </div>
-</center></body>
+</center>
+
+	  <div class="modal fade" id="deleteJobModal" data-backdrop="false"
+tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	
+		<div class="modal-dialog ">
+			<div class="modal-content">
+				<form>
+
+					<div class="modal-header">
+						<h4 class="modal-title">Delete User</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="close">&times;</button>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="id_d" name="id" class="form-control">
+						<p>Are you sure you want to delete these Records?</p>
+						<p class="text-warning">
+							<small>This action cannot be undone.</small>
+						</p>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							value="Cancel">
+						<button type="button" class="btn btn-danger" id="delete">Delete</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
 </html>

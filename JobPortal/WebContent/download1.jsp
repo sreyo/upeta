@@ -14,7 +14,9 @@
 
   out.println("servlet"+resumename);
   String filename = resumename;   
-  String filepath = "D:/upload/";   
+  String filepath=application.getRealPath("/WEB-INF/resume/");
+  out.println("servlet"+filepath);
+  //String filepath = "D:/upload/";   
   response.setContentType("APPLICATION/OCTET-STREAM");   
   response.setHeader("Content-Disposition","attachment; filename=\"" + filename + "\"");   
   

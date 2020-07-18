@@ -11,6 +11,7 @@ import java.util.List;
 import smart.job.bean.Resume;
 import smart.job.bean.Seeker;
 import smart.job.dao.SeekerDao;
+import smart.job.dao.JavaMail;
 
 public class SeekerDao {
     public static Connection getConnection(){  
@@ -60,6 +61,12 @@ public class SeekerDao {
 	    up.setString(1,appid);
 		up.setInt(2,generatedKey); 
 		status=up.executeUpdate();
+		JavaMail jm = new JavaMail(); //Instance of elf class
+        String to = s.getEmail();
+        String upass = "smartjob123";
+			
+	    int emailstatus =JavaMail.email(to, upass);
+			 
         con.close();  
     }catch(Exception ex){ex.printStackTrace();}  
       

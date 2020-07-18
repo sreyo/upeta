@@ -44,7 +44,6 @@ public class SeekersrchAdminServlet extends HttpServlet {
 	    PrintWriter out = response.getWriter();
         HttpSession session = request.getSession(true);
         String hostname = (String) session.getAttribute("host");
-        System.out.println("hostname"+hostname);
 
 
 	    List seekerList=SeekerDao.getAll(hostname);  

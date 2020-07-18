@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -66,7 +67,16 @@ public class UploadServlet extends HttpServlet {
         File disk;
 		int i = 1;
 		FileItem item;
-		try {
+	    ServletContext context = request.getServletContext();
+	    String appPath = context.getRealPath("");
+	    String rpath = "WEB-INF\\resume";
+		/*
+		 * System.out.println(rpath);
+		 */	    
+	    String path = appPath + rpath;
+		/*
+		 * System.out.println(path);
+		 */		try {
 			List items = upload.parseRequest(request);
 			Iterator iter = items.iterator();
 			response.setContentType("text/html");
@@ -76,30 +86,34 @@ public class UploadServlet extends HttpServlet {
 					formField[i] = item.getString();
 	                i++;
 				} else {
-					disk = new File("D:\\upload\\"+item.getName());
+				//	disk = new File("D:\\upload\\"+item.getName());
+					disk = new File(path+"\\"+item.getName());
+					System.out.println(disk);
 					item.write(disk);
 					namefile = item.getName();
-				    ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
+				//    ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
+					ext = FilenameUtils.getExtension(path+"\\"+item.getName());
+					System.out.println(ext);
+
 
 			}
-
+			}
 			Resume r = new Resume();
 			r.setFilename(namefile);
 			r.setFileextn(ext);
 			r.setUsername(formField[1]);
 	        HttpSession session = request.getSession(true);
 	        String hostname = (String) session.getAttribute("host");
-
+  
 			int attach = ResumeDao.save(r,hostname);
 
-		//	int status = SeekerDao.update(s);
 			if (attach > 0) {				
-				response.getWriter().write("success");
-			//	request.getRequestDispatcher("/index.jsp").forward(request, response);
+				//response.getWriter().write("success");
+				request.getRequestDispatcher("/resumeupload.jsp").forward(request, response);
 
 			} else {
 				response.getWriter().write("failed");
-			}}
+			}
 	
 		// Rudimentary handling of any exceptions
 		// TODO: Something useful if an error occurs

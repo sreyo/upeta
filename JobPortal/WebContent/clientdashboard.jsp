@@ -6,7 +6,7 @@
     
 <div class="panel-body">
 	
- <jsp:include page="jobcreated2.jsp" />  
+ <jsp:include page="jobcreated.jsp" />  
 </div>
 <jsp:include page="clientfooter.jsp" />  
 

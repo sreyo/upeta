@@ -8,8 +8,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -68,44 +71,54 @@ public class ApplicationServlet extends HttpServlet {
         File disk;
 		int i = 1;
 		try {
-			List items = upload.parseRequest(request);System.out.println("inside"+request.toString());
+			List items = upload.parseRequest(request);
 			Iterator iter = items.iterator();
 			response.setContentType("text/html");
+		    ServletContext context = request.getServletContext();
+		    String appPath = context.getRealPath("");
+		    String rpath = "WEB-INF\\resume";
+		    String path = appPath + rpath;
+			/*
+			 * System.out.println(path);
+			 */
+
 			while (iter.hasNext()) {
 				item = (FileItem) iter.next();
 				if (item.isFormField()) { 
 					formField[i] = item.getString();
 	                i++;
 				} else {
-					disk = new File("D:\\upload\\"+item.getName());
+					/*
+					 * disk = new File("D:\\upload\\"+item.getName());
+					 */					
+					disk = new File(path+"\\"+item.getName());
 					item.write(disk);
 					namefile = item.getName();
-				    ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
+				   // ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
+					ext = FilenameUtils.getExtension(path+"\\"+item.getName());
 
 				}System.out.println("formfield"+formField[i]);
 				}
 			  //  String usrnm = formField[1];
     			Jobapply j = new Jobapply();
-			    j.setJobcode(formField[2]);
-				j.setResumename(namefile);
-		        HttpSession session = request.getSession(true);
-		        String hostname = (String) session.getAttribute("host");
-		        String usrnm = (String) session.getAttribute("name");
-
-				int attach = ResumeDao.jobapply(j,usrnm,hostname);
-				if (attach > 0) {
-					response.setContentType("text/html");
-					response.getWriter().write("success");
-			        RequestDispatcher rd=request.getRequestDispatcher("jobapplied.jsp");  
-			        rd.forward(request,response); 
-				} else {
-					response.getWriter().write("failed");
-
-				}
-
-		} catch (Exception e) {
-		e.printStackTrace();
-		}
-	}	
-	
-}
+                j.setJobcode(formField[1]);
+                j.setResumename(namefile);
+                final HttpSession session = request.getSession(true);
+                final String hostname = (String)session.getAttribute("host");
+                final String usrnm = (String)session.getAttribute("name");
+                final int attach = ResumeDao.jobapply(j, usrnm, hostname);
+                if (attach > 0) {
+                    response.setContentType("text/html");
+                    response.getWriter().write("success");
+                    final RequestDispatcher rd = request.getRequestDispatcher("Submanage.jsp");
+                    rd.forward((ServletRequest)request, (ServletResponse)response);
+                }
+                else {
+                    response.getWriter().write("failed");
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
