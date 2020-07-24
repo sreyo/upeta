@@ -64,7 +64,7 @@ tfoot input {
 		$('#editor').html($(editor).text());
 		if(typeof name !== "undefined")
 		{
-	    $('#panel').append(' <div class="form-group col-sm-3" ><input type="checkbox" id='+id+' value="" name="myCheckbox"  /><label>'+name+'</label>');}
+	    $('#panel').append(' <div class="form-group col-sm-3" ><input type="radio" id="'+id+'" value="'+name+'" name="radioresume"  /><label>'+name+'</label>');}
 //<li class="list-group-item"><label for="checkbox"> '+name+'</label>   </li>');
 
 		}
@@ -258,18 +258,20 @@ tfoot input {
 				 <div class="form-group col-sm-12" >
 				 <label>Job Description</label> 
 <!--      			<textarea id="editor" rows="5" cols="20"></textarea><br />
- -->				 <div contenteditable="true"  id="editor" readonly="true"> </div>
+ -->				 <div contenteditable="true"  id="editor" name="editor" readonly="true"> </div>
 				 				        
                     </div>
+                    <input type ="hidden" class="form-control" id="idses" name="idses"  value="<%=session.getAttribute("host")%>">
+                 
+					 <div class="form-group">
+					 <label>Select / Upload Resume </label> 
+              			 <div class="panel-body" id="panel">
+                     </div>
 					
 					<div class="form-group col-sm-12" >
-					 <input type ="hidden" class="form-control" id="idses" name="idses"  value="<%=session.getAttribute("name")%>">
 						
-							<label>Select / Upload Resume </label> <input type="file" id="resume"  name="resume"  class="form-control" >
+							<input type="file" id="resume"  name="resume"  class="form-control" >
 						</div>
-					    <div class="form-group">
-              			 <div class="panel-body" id="panel">
-                        </div>
 					    
 						</div>
 					</div></div>

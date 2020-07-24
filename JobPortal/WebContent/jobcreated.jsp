@@ -65,7 +65,6 @@ $(document).on('click','.update',function(e) {
     var country = $(this).attr("data-country");
     var zip = $(this).attr("data-zip");
     var editor = $(this).attr("data-editor");
-    alert(editor);
 
 	   $('#id').val(jobcode);
 	   $('#jobtitle').val(jobtitle);
@@ -80,7 +79,10 @@ $(document).on('click','.update',function(e) {
 	   $("[name=remotejob]").val([remotejob]);
 	   $("[name=country]").val(country);
 	   $("[name=jobtype]").val([jobtype]);
+	   $("[name=editor]").text([editor]);
 
+/* 	   tinymce.activeEditor.setContent(editor);
+ */
 
  
  });
@@ -170,7 +172,7 @@ $( window ).load(function() {
 		type: "POST",
 		cache: false,
 		success: function(dataResult){ 
-		var data = JSON.parse(JSON.stringify(dataResult)); alert(JSON.stringify(dataResult));
+		var data = JSON.parse(JSON.stringify(dataResult)); //alert(JSON.stringify(dataResult));
 		var len = data.length;
 		for (var i = 0; i < len; i++) {
  			   var id = data[i].jobcode;
@@ -188,13 +190,13 @@ $( window ).load(function() {
 			   var country = data[i].country;
 			   var phone = data[i].phone;
 			   var num = data[i].count;
-			   var editor = data[i].editor;alert(editor);
+			   var editor = data[i].editor;
 /* var view ='<a href="#viewJobModal" class="view" data-id='+id+' data-toggle="modal"><i class="glyphicon glyphicon-eye-open" data-toggle="tooltip"  title="View"></i></a></td>';        
  */var notf = '<td><button type="button"  data-id='+id+' class="job btn btn-info btn-lg badge badge-pill badge-info" data-toggle="modal" data-target="#viewModal"> Applied -  '+num+'</button></td></tr>';
 
 //var notf = '<td><a href="#"class="badge badge-pill badge-info"><div id="stage"></div> Applied -  '+num+'</a></td></tr>';
 var del='<a href="#deleteJobModal" class="delete" data-id='+id+' data-toggle="modal"><i class="glyphicon glyphicon-remove-sign" data-toggle="tooltip"  title="Delete"></i></a></td>';
-$('#table').append('<tr><td data-input='+id+'srch>'+id+'</td><td data-input='+jobtitle+'srch>'+jobtitle+'</td><td >'+jobtype+'</td><td data-input='+city+'srch >'+city+','+state+'</td><td>'+remotejob+'</td><td>'+jobstatus+'</td><td><a href="#editJobModal" class="edit" data-toggle="modal"><i class="update glyphicon glyphicon-edit" data-toggle="tooltip" data-id="'+id+'" data-email="'+email+'" data-remotejob="'+remotejob +' "data-jobtitle="'+jobtitle+'" data-jobtype="'+jobtype+'" data-jobstatus="'+jobstatus+'"  data-phone="'+phone+'" data-city="'+city+'" data-address="'+address+'"  data-state="'+state+'" data-country="'+country+'" data-zip="'+zip+'"  data-editor= "\n"+"'+editor+'"+ "\n"  title="Edit"></i></a>||'+del+'||'+notf);
+$('#table').append('<tr><td data-input='+id+'srch>'+id+'</td><td data-input='+jobtitle+'srch>'+jobtitle+'</td><td >'+jobtype+'</td><td data-input='+city+'srch >'+city+','+state+'</td><td>'+remotejob+'</td><td>'+jobstatus+'</td><td><a href="#editJobModal" class="edit" data-toggle="modal"><i class="update glyphicon glyphicon-edit" data-toggle="tooltip" data-id="'+id+'" data-email="'+email+'" data-remotejob="'+remotejob +' "data-jobtitle="'+jobtitle+'" data-jobtype="'+jobtype+'" data-jobstatus="'+jobstatus+'"  data-phone="'+phone+'" data-city="'+city+'" data-address="'+address+'"  data-state="'+state+'" data-country="'+country+'" data-zip="'+zip+'"  data-editor= "'+editor+'"  title="Edit"></i></a>||'+del+'||'+notf);
   				}
 	}
 		
@@ -237,7 +239,6 @@ $('#table').append('<tr><td data-input='+id+'srch>'+id+'</td><td data-input='+jo
 						<th>Location</th>
                         <th>Remote</th>
                         <th>Status</th>
-                        
                         <th>Action</th>
                         <th>Applicant</th>
                         
@@ -280,7 +281,8 @@ tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="tru
 			    </div>
 			    <div class=clearfix></div>
 			    <div class="form-group  col-sm-4">
-				   <input type="phone" id="phone" name="phone" class="form-control" placeholder="Phone"  required>
+  <input type="tel" id="phone" name="phone" placeholder="123-45-678" class="form-control" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required><br><br>
+  <small>Format: 123-45-678</small><br><br>
 				</div>		
 			    
 			    <div class="form-group col-md-8">RemoteJob
@@ -336,7 +338,7 @@ tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="tru
 							
 			<div class=" col-sm-12">
 			
-			    <textarea class="tinymce" id="editor" rows="10" cols="80">
+			    <textarea class="tinymce" id="editor" name="editor" rows="500" cols="800">
     </textarea>
 			
 			</div>				

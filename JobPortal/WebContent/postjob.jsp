@@ -23,7 +23,58 @@ $(document).ready(function(){
 	$('#user_form').submit(function(){
 		$(this).find(':submit').attr( 'disabled','disabled' );
 		});
-});
+/* 	   $("#user_form").validate({
+		      rules: {
+		          fname: { minlength: 3,
+		                   required: true
+				  },
+		          lname: {required: true},
+		          email: {
+		             required: true,
+		             email: true,//add an email rule that will ensure the value entered is valid email id.
+		             maxlength: 255,
+		          },
+		          phone: {
+		                required: true,
+		                minlength: 10,
+		                maxlength: 13,
+		                number: true
+		            },
+		          address: {
+		                required: true,
+		                minlength: 10,
+		            },
+
+
+		       },        highlight: function(element) {
+		            $(element).closest('.form-group').addClass('has-error');
+		        },
+		        unhighlight: function(element) {
+		            $(element).closest('.form-group').removeClass('has-error');
+		        },
+		        errorElement: 'span',
+		        errorClass: 'help-block',
+		        errorPlacement: function(error, element) {
+		            if(element.parent('.input-group').length) {
+		                error.insertAfter(element.parent());
+		            } else {
+		                error.insertAfter(element);
+		            }},
+
+		       messages: {
+		    	    fname: 'This field is required',
+		    	    lname: 'This field is required',
+		    	    email: 'Enter a valid email',
+		    	    phone: 'Enter valid phone number'
+		     },
+		        submitHandler: function(form) {
+		            form.submit();
+		        }
+
+		    });
+
+ */
+ });
 </script>	
 	
 </head>
@@ -38,7 +89,7 @@ $(document).ready(function(){
 				<input type="text" id="jobtitle" name="jobtitle" class="form-control" placeholder="Job Title" required>
 			</div>
 			<div class="form-group col-sm-4">
-	           <select id="jobtype" name="jobtype" class="form-control">
+	           <select id="jobtype" name="jobtype" class="form-control" required>
 	              <option value="">------JobType---</option>
 	              <option value="Permanent">FullTime</option>
 	              <option value="Contract">Contract</option>
@@ -59,19 +110,19 @@ $(document).ready(function(){
 			
 					<div class="checkbox-inline">
 							<label class="form-check-label form-control">
-							<input type="radio" id="remote" name="remote" class="form-check-input" value="Yes">Yes
+							<input type="radio" id="remote" name="remote" class="form-check-input" value="Yes" required>Yes
 							</label>
 					</div>
 					<div class="checkbox-inline">
 						 <label class="form-check-label form-control">
-								 <input type="radio" id="remote" name="remote" class="form-check-input" value="No">No
+								 <input type="radio" id="remote" name="remote" class="form-check-input" value="No" required>No
 						 </label>
 				</div>
 			    
 			  </div>
 			<div class=clearfix></div>
 				<div class="form-group col-sm-4">
-					<textarea id="address" rows="4" cols="50" placeholder="Address" class="form-control"></textarea>
+					<textarea id="address" rows="4" cols="50" placeholder="Address" class="form-control" required></textarea>
 				</div>
 			<div class="form-group  col-sm-4">
 <!-- 				   <input type="text" id="org_selectmem" name="org_selectmem" class="form-control"  disabled>
@@ -79,7 +130,7 @@ $(document).ready(function(){
 				
     						<div class="form-group  col-sm-4">
     						
-								<select  id="jobstatus" name="jobstatus" class="form-control">
+								<select  id="jobstatus" name="jobstatus" class="form-control" required>
 						<option value="" > ---Status---</option>
 						<option  value="Active">Active</option>
 						<option  value="Hold">Hold</option>
@@ -99,7 +150,7 @@ $(document).ready(function(){
 		</div>
 		
 		<div class="form-group  col-sm-3">
-           <select id="country" name="country" class="form-control">
+           <select id="country" name="country" class="form-control" required>
               <option selected disabled >---Country---</option>
               
                <option value="USA">USA</option>
@@ -109,7 +160,7 @@ $(document).ready(function(){
 		</select>							
 		</div>
         		<div class="form-group  col-sm-3">
-			<input type="text" id="zip" name="zip" class="form-control"
+			<input type="number" id="zip" name="zip" class="form-control"
 					placeholder="Zip" required>
 		
 		</div>
@@ -117,10 +168,8 @@ $(document).ready(function(){
 							<div class=clearfix></div>
 							
 			<div class=" col-sm-12">
-		<textarea class="tinymce" id="editor" name="editor"></textarea>
+		<textarea class="tinymce" id="editor" name="editor" required></textarea>
  			
-<!-- 			    <textarea class="tinymce" id="editor" rows="10" cols="">
-    </textarea> -->
 			
 					</div>
 					<div class="modal-footer">

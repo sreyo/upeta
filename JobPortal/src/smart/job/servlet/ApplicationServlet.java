@@ -64,7 +64,7 @@ public class ApplicationServlet extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		ServletOutputStream out = null;
 		FileItem item;
-		String[] formField = new String[14]; //declare with size
+		String[] formField = new String[11]; //declare with size
 		String namefile = null;
 		String ext = null;
         String content = null;
@@ -83,22 +83,42 @@ public class ApplicationServlet extends HttpServlet {
 			 */
 
 			while (iter.hasNext()) {
-				item = (FileItem) iter.next();
-				if (item.isFormField()) { 
-					formField[i] = item.getString();
-	                i++;
-				} else {
-					/*
-					 * disk = new File("D:\\upload\\"+item.getName());
-					 */					
-					disk = new File(path+"\\"+item.getName());
-					item.write(disk);
-					namefile = item.getName();
-				   // ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
-					ext = FilenameUtils.getExtension(path+"\\"+item.getName());
+				 item = (FileItem) iter.next();
+				if (item.isFormField()) {
+					formField[i] = item.getString();	     
+					System.out.println(i+"-"+formField[i]);	
 
-				}System.out.println("formfield"+formField[i]);
-				}
+	                i++;
+
+				} else {
+	    			System.out.println(formField[9]);
+					File file;
+/*					File disk = new File(path+"\\"+formField[12]+"\\"+item.getName());
+*/	    			disk = new File(path+"\\"+formField[9]);
+			        if (!disk.exists()) {
+			            if (disk.mkdir()) {
+			                System.out.println("Directory is created!");
+			                file = new File(path+"\\"+formField[9]+"\\"+item.getName());
+							item.write(file);
+							namefile = item.getName();
+							ext = FilenameUtils.getExtension(path+"\\"+formField[9]+"\\"+item.getName());
+
+			                } 
+			            } else {
+			                file = new File(path+"\\"+formField[9]+"\\"+item.getName());
+			                System.out.println("else");
+			                item.write(file);
+			                namefile = item.getName();
+				   // ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
+				   // InputStream inputStream = new FileInputStream(disk);
+					ext = FilenameUtils.getExtension(path+"\\"+formField[9]+"\\"+item.getName());
+
+					
+					}
+			        
+			       }
+			     }
+			
 			  //  String usrnm = formField[1];
     			Jobapply j = new Jobapply();
                 j.setJobcode(formField[1]);

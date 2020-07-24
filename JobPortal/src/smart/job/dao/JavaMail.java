@@ -16,8 +16,8 @@ public class JavaMail {
 	 * JavaMail().email(to, userpassword); }
 	 */
     public static int email(String to,String userpassword) {
-        String from = "dyutimidhun@gmail.com";
-        String password = "DyutiMidhun@30";
+        String from = "dharmasenaofficial@gmail.com";
+        String password = "Standwithdharma2020";
         String subject = "Job Portal Registration Complete";
         String msg = "Your username" +to+ "and password "+userpassword;
         Properties properties = System.getProperties();

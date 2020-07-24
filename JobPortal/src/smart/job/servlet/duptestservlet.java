@@ -59,7 +59,6 @@ public class duptestservlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
 		FileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		ServletOutputStream out = null;
@@ -88,23 +87,35 @@ public class duptestservlet extends HttpServlet {
 				if (item.isFormField()) {
 					formField[i] = item.getString();
 	                i++;
-	    			System.out.println(formField[i]);
 
 				} else {
-					/*
-					 * File disk = new File("D:\\upload\\"+item.getName());
-					 */	
-					File disk = new File(path+"\\"+item.getName());
+	    			System.out.println(formField[12]);
+					File file;
+/*					File disk = new File(path+"\\"+formField[12]+"\\"+item.getName());
+*/	    			File disk = new File(path+"\\"+formField[12]);
+			        if (!disk.exists()) {
+			            if (disk.mkdir()) {
+			                System.out.println("Directory is created!");
+			                file = new File(path+"\\"+formField[12]+"\\"+item.getName());
+							item.write(file);
+							namefile = item.getName();
+							ext = FilenameUtils.getExtension(path+"\\"+formField[12]+"\\"+item.getName());
 
-					item.write(disk);
-					namefile = item.getName();
+			                } 
+			            } else {
+			                file = new File(path+"\\"+formField[12]+"\\"+item.getName());
+			                System.out.println("else");
+			                item.write(file);
+			                namefile = item.getName();
 				   // ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
 				   // InputStream inputStream = new FileInputStream(disk);
-					ext = FilenameUtils.getExtension(path+"\\"+item.getName());
+					ext = FilenameUtils.getExtension(path+"\\"+formField[12]+"\\"+item.getName());
 
 					System.out.println(ext);	
 					}
-			}
+			       }
+			     }
+			
 			Seeker s = new Seeker();
 			s.setFirstname(formField[1]);
 			s.setLastname(formField[2]);

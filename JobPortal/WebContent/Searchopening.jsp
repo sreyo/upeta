@@ -136,7 +136,7 @@ $(document).on('click','#search',function() {
 			    <th style="width:20%;">Job Type</th>
 				<th style="width:20%;">Location</th>			
 				<th style="width:20%;">Remote</th>
-				<th style="width:20%;">Country</th>
+				<th style="width:20%;">Apply</th>
 			</tr>
 		</thead>
 		<tbody id="table">

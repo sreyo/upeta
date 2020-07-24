@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 
 		  String u = request.getParameter("usr");  
 	      String p = request.getParameter("pasw"); 
-	      String h = request.getParameter("host");System.out.println("get"+h);
+	      String h = request.getParameter("host");
   		  HttpSession session=request.getSession();  
           
 		    response.setContentType("text/html");  
@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
         		session.setAttribute("host",h);  
                  hostname = (String) session.getAttribute("host");
 
-        		System.out.println(hostname);
+        		System.out.println("hname"+hostname);
 				DBconnect.initializeDatabase(hostname);
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
 			  // reuse existing 
 			  session.setAttribute("name",u); 
 
-			  String admin = new  String("neenumanohar@gmail.com"); 
+			  String admin = new  String("admin"); 
 			  String superadmin = new String("admin@sreyo.com");
 			  if(u.contentEquals(superadmin))
 			  {      

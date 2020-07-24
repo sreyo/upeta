@@ -61,13 +61,14 @@ public class SeekerDao {
 	    up.setString(1,appid);
 		up.setInt(2,generatedKey); 
 		status=up.executeUpdate();
-		JavaMail jm = new JavaMail(); //Instance of elf class
-        String to = s.getEmail();
-        String upass = "smartjob123";
-			
-	    int emailstatus =JavaMail.email(to, upass);
-			 
-        con.close();  
+			/*
+			 * JavaMail jm = new JavaMail(); //Instance of elf class String to =
+			 * s.getEmail(); String upass = "smartjob123";
+			 * 
+			 * int emailstatus =JavaMail.email(to, upass);
+			 * System.out.println("emailstatus"+emailstatus);
+			 */      
+		con.close();  
     }catch(Exception ex){ex.printStackTrace();}  
       
     return status;  
@@ -214,7 +215,8 @@ public class SeekerDao {
            // Connection con=SeekerDao.getConnection();  
             Connection con = DBconnect.initializeDatabase(hostname); 
 
-            PreparedStatement ps=con.prepareStatement("SELECT * FROM job_seeker ");  
+            PreparedStatement ps=con.prepareStatement("SELECT * FROM job_seeker where role =? ");  
+            ps.setString(1,"user");  
             ResultSet rs=ps.executeQuery();  
             while(rs.next()){  
             	Seeker n=new Seeker();  
