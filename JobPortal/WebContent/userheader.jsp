@@ -24,7 +24,7 @@
 <script type="text/javascript"><%@include file="/WEB-INF/js/dashjs.js"%></script>
 
 
-<title>SMART JobBoard</title>
+<title>DS JobPortal</title>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-static-top">
@@ -54,8 +54,8 @@
 				<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 			</form>
  -->			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" target="_blank">Applicant</a></li>
-				<li class="dropdown ">
+<!-- 				<li><a href="#" target="_blank">Applicant</a></li>
+ -->				<li class="dropdown ">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						<%= session.getAttribute("name") %>
 
@@ -79,7 +79,7 @@
 	<div class="absolute-wrapper"> </div>
 	<!-- Menu -->
 	<div class="side-menu">
-		<nav class="navbar navbar-default" role="navigation">
+		<nav class="navbar navbar-dark bg-dark" role="navigation">
 			<!-- Main Menu -->
 			<div class="side-menu-container">
 				<ul class="nav navbar-nav">

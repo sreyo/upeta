@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ --><script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
 
    
 
@@ -201,7 +200,58 @@ $('#table').append('<tr><td data-input='+id+'srch>'+id+'</td><td data-input='+jo
 	}
 		
 	});
+/* 	$('td', '#jobtable').each(function(i) {
+	    $(this).text(i+1);
+	});
 
+
+
+	$('#jobtable').each(function() {
+	    var currentPage = 0;
+	    var numPerPage = 10;
+	    var $table = $(this);
+	    $table.bind('repaginate', function() {
+	        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+	    });
+	    $table.trigger('repaginate');
+	    var numRows = $table.find('tbody tr').length;
+	    var numPages = Math.ceil(numRows / numPerPage);
+	    var $pager = $('<div class="pager"></div>');
+	    for (var page = 0; page < numPages; page++) {
+	        $('<span class="page-number"></span>').text(page + 1).bind('click', {
+	            newPage: page
+	        }, function(event) {
+	            currentPage = event.data['newPage'];
+	            $table.trigger('repaginate');
+	            $(this).addClass('active').siblings().removeClass('active');
+	        }).appendTo($pager).addClass('clickable');
+	    }
+	    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+	});
+ */
+    var items = $("#jobtable tbody tr");
+    var tablaeBody = $("#jobtable tbody");
+        var numItems = items.length;
+        var perPage = 20;
+
+        // Only show the first 20 (or first `per_page`) items initially.
+        tablaeBody.html(items.slice(0,20));
+        // Now setup the pagination using the `.pagination-page` div.
+        $(".pagination-page").pagination({
+            items: numItems,
+            itemsOnPage: perPage,
+            cssStyle: "light-theme",
+
+            // This is the actual page changing functionality.
+            onPageClick: function(pageNumber) {
+                // We need to show and hide `tr`s appropriately.
+                var showFrom = perPage * (pageNumber - 1);
+                var showTo = showFrom + perPage;
+
+                tablaeBody.html(items.slice(showFrom,showTo));
+
+            }
+        });
 
 });
 </script>

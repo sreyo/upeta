@@ -12,8 +12,8 @@ li {
     display: block;
 }
 
-li:before {
-    /*Using a Bootstrap glyphicon as the bullet point*/
+/* li:before {
+    Using a Bootstrap glyphicon as the bullet point
     content: "\e080";
     font-family: 'Glyphicons Halflings';
     font-size: 9px;
@@ -24,4 +24,4 @@ li:before {
 .panel-primary>.panel-heading{
 	background-color:#555;
 	border-color:#333;
-}
+} */

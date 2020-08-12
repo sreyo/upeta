@@ -12,7 +12,7 @@
 
 <% } else {%>
 
-<jsp:include page="login.jsp" />  
+<jsp:include page="index.jsp" />  
 <% } %>
 
 

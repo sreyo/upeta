@@ -64,11 +64,13 @@ public class ApplicationServlet extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		ServletOutputStream out = null;
 		FileItem item;
-		String[] formField = new String[11]; //declare with size
+		String[] formField = new String[10]; //declare with size
 		String namefile = null;
 		String ext = null;
         String content = null;
         File disk;
+        final PrintWriter outp = response.getWriter();
+
 		int i = 1;
 		try {
 			List items = upload.parseRequest(request);
@@ -105,10 +107,11 @@ public class ApplicationServlet extends HttpServlet {
 
 			                } 
 			            } else {
-			                file = new File(path+"\\"+formField[9]+"\\"+item.getName());
-			                System.out.println("else");
-			                item.write(file);
-			                namefile = item.getName();
+						/*
+						 * file = new File(path+"\\"+formField[9]+"\\"+item.getName());
+						 * System.out.println(file+"else"); item.write(file);
+						 */			            
+			            namefile = item.getName();
 				   // ext = FilenameUtils.getExtension("D:\\upload\\"+item.getName()); // returns "txt"
 				   // InputStream inputStream = new FileInputStream(disk);
 					ext = FilenameUtils.getExtension(path+"\\"+formField[9]+"\\"+item.getName());
@@ -134,7 +137,23 @@ public class ApplicationServlet extends HttpServlet {
                     rd.forward((ServletRequest)request, (ServletResponse)response);
                 }
                 else {
-                    response.getWriter().write("failed");
+                    final String val = "Failed resume upload";
+                    outp.println("<!DOCTYPE html>");
+                    outp.println("<html>");
+                    outp.println("<head>");
+                    outp.println("<title>Apply Job</title>");
+                    outp.println("</head>");
+                    outp.println("<body onLoad=\"showResult();\">");
+                    outp.println("<script>");
+                    outp.println("function showResult(){");
+                    outp.println("alert(\"" + val + "\")");
+                    outp.println("}");
+                    outp.println("</script>");
+                    outp.println("</body>");
+                    outp.println("</html>");
+                    request.getRequestDispatcher("/clientdashboard.jsp").include((ServletRequest)request, (ServletResponse)response);
+
+
                 }
             }
             catch (Exception e) {

@@ -5,15 +5,12 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>User Data</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<!-- 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ --><!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
+ -->	<script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/tinymce.min.js"></script>
 	<script type="text/javascript">
 $(document).ready(function(){
@@ -128,9 +125,9 @@ $(document).ready(function(){
 <!-- 				   <input type="text" id="org_selectmem" name="org_selectmem" class="form-control"  disabled>
  -->				</div>		
 				
-    						<div class="form-group  col-sm-4">
+    					<div class="form-group  col-sm-4">
     						
-								<select  id="jobstatus" name="jobstatus" class="form-control" required>
+						<select  id="jobstatus" name="jobstatus" class="form-control" required>
 						<option value="" > ---Status---</option>
 						<option  value="Active">Active</option>
 						<option  value="Hold">Hold</option>

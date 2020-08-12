@@ -62,8 +62,8 @@ footer {
 	  $("#btn-add").click(function(e) {
 	  	 var host = $(location).attr('href') ;
 	  	 var res = host.split("=");
-	    //   $('#hostname').val(res[1]);
-	       $('#hostname').val("dev");
+	       $('#hostname').val(res[1]);
+	   //    $('#hostname').val("dev");
 	  		 });
 
 
@@ -71,8 +71,8 @@ footer {
 	  	 var currLoc = $(location).attr('href'); 
 	  	 var host = $(location).attr('href') ;
 	  	 var res = host.split("=");
-	   //   $('#hostname').val(res[1]);
-	      $('#hostname').val("dev");
+	      $('#hostname').val(res[1]);
+	   //   $('#hostname').val("dev");
 
 	  	
 	  // Add the following code if you want the name of the file appear on select
@@ -134,7 +134,7 @@ footer {
 	      $.ajax({
 	  		url: "LoginServlet",
 	  		type: "POST",
-	  		data:{ usr:user, pasw:pswd, host: "dev" },
+	  		data:{ usr:user, pasw:pswd, host: res[1] },
 	  		cache: false,
 	  		success : function(data){
 	  		if($.trim(data) == "superadmin") {

@@ -8,11 +8,8 @@
 <body>
 <%    out.println("indown:");
 
-    String resumename  = request.getParameter("filename");
-    String name = (String)session.getAttribute("name"); 
-
-
-  out.println("servlet"+resumename);
+  String resumename  = request.getParameter("filename");
+  String name = (String)session.getAttribute("name"); 
   String filename = resumename;   
   String filepath=application.getRealPath("/WEB-INF/resume/");
   out.println("servlet"+filepath);

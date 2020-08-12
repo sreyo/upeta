@@ -4,9 +4,9 @@ pageEncoding="ISO-8859-1"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ --><link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -24,7 +24,8 @@ pageEncoding="ISO-8859-1"%>
 <script type="text/javascript"><%@include file="/WEB-INF/js/dashjs.js"%></script>
 
 
-<title>SMART - JobBoard</title>
+<title>				DS JobPortal 
+</title>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-static-top">
@@ -41,7 +42,7 @@ pageEncoding="ISO-8859-1"%>
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="#">
-				SMART JobBoard 
+				DS JobPortal 
 			</a>
 		</div>
 
@@ -54,9 +55,10 @@ pageEncoding="ISO-8859-1"%>
 				<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 			</form>
  -->			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" target="_blank">ADMIN</a></li>
-				<li class="dropdown ">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+<!-- 				<li><a href="#" target="_blank">ADMIN</a></li>
+ -->				<li class="dropdown ">
+ 
+					<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 						<%= session.getAttribute("name") %>
 
 						<span class="caret"></span></a>
@@ -79,12 +81,13 @@ pageEncoding="ISO-8859-1"%>
 	<div class="absolute-wrapper"> </div>
 	<!-- Menu -->
 	<div class="side-menu">
-		<nav class="navbar navbar-default" role="navigation">
+		<nav class="navbar navbar-dark bg-dark" role="navigation">
 			<!-- Main Menu -->
 			<div class="side-menu-container">
 				<ul class="nav navbar-nav">
    					
  				    <li><a href="${pageContext.request.contextPath}/postjobform.jsp"><span class="glyphicon glyphicon-globe"></span> Post Job </a></li>
+                   	<li><a href="${pageContext.request.contextPath}/addcandform.jsp"><span class="glyphicon glyphicon-user"></span> Add Candidate</a></li>
                     <li ><a href="${pageContext.request.contextPath}/Srchcand.jsp"><span class="glyphicon glyphicon-dashboard"></span> Search Candidate</a></li>
 					<li><a href="${pageContext.request.contextPath}/Jobmanage.jsp"><span class="glyphicon glyphicon-cloud"></span> Submission Management</a></li>
                 
