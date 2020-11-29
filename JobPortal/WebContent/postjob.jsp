@@ -165,7 +165,7 @@ $(document).ready(function(){
 							<div class=clearfix></div>
 							
 			<div class=" col-sm-12">
-		<textarea class="tinymce" id="editor" name="editor" required></textarea>
+		<textarea class="tinymce" id="editor" name="editor" ></textarea>
  			
 			
 					</div>

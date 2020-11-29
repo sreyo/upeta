@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 <title>SMART-JobBoard</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
@@ -11,6 +10,14 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
+html, body {
+/*   overflow: hidden;
+ */ }
+.float-right {
+    float: right;
+    vertical-align: sup
+}
+
 .modal-header {
 	background-color: #5bc0de;
 	color: white !important;
@@ -33,14 +40,19 @@
 	background-size: 100% 100%;
 	height: 400px;
 }
+imgdiv{	background-image: url("seekers.jpg");
+	height: 50%;
+
+}
 
 .jumbotron {
-	background-image: url("image_2.jpg");
-	height: 100%;
+	background-image: url("image_2.png");
 	/* Center and scale the image nicely */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	    background-attachment: fixed;
+	
 }
 
 /* Remove the navbar's default margin-bottom and rounded borders */
@@ -51,28 +63,33 @@
 
 /* Add a gray background color and some padding to the footer */
 footer {
-	/*       background-color: #f2f2f2;
- */
-	padding: 25px;
+	   background-color: #21217a;
+	   padding:5px;
+ 
 }
 </style>
 <script>
   $(document).ready(function(){
-		
 	  $("#btn-add").click(function(e) {
-	  	 var host = $(location).attr('href') ;
+/* 	  	 var host = $(location).attr('href') ;
 	  	 var res = host.split("=");
-	       $('#hostname').val(res[1]);
-	   //    $('#hostname').val("dev");
+ */	  	 var domain = $(location).attr('hostname');                    
+
+        alert(domain);
+
+	     $('#hostname').val(domain);
+	    //  $('#hostname').val("dev");
 	  		 });
 
 
 	  	//getting current url 
-	  	 var currLoc = $(location).attr('href'); 
-	  	 var host = $(location).attr('href') ;
+/* 	  	 var host = $(location).attr('href') ;
 	  	 var res = host.split("=");
-	      $('#hostname').val(res[1]);
-	   //   $('#hostname').val("dev");
+ */	   
+		 var domain = $(location).attr('hostname');                    
+		 alert(domain);
+		 $('#hostname').val(domain);
+	  //  $('#hostname').val("dev");
 
 	  	
 	  // Add the following code if you want the name of the file appear on select
@@ -126,15 +143,18 @@ footer {
 	  $("#btn_login").click(function() {
 	  	 var user   = $('#usrname').val();
 	  	 var pswd   = $('#psw').val();
-	  	 var host   = $(location).attr('href') ;
+		 var domain = $(location).attr('hostname');                    
+
+/* 	  	 var host   = $(location).attr('href') ;
 	  	 var res = host.split("=");
-	     // $('#hostname').val("example");
+ */	     // $('#hostname').val("example");
 	     //  $.session.set("domain","example");
 	  	 //var host = $(location).attr('host') ;
 	      $.ajax({
 	  		url: "LoginServlet",
 	  		type: "POST",
-	  		data:{ usr:user, pasw:pswd, host: res[1] },
+	     //	data:{ usr:user, pasw:pswd, host: "dev" },
+	    	data:{ usr:user, pasw:pswd, host: domain },
 	  		cache: false,
 	  		success : function(data){
 	  		if($.trim(data) == "superadmin") {
@@ -144,11 +164,11 @@ footer {
 	  		}else if($.trim(data) == "user") {
 	  	        window.location.replace("userdashboard.jsp");
 	  		}else if($.trim(data) == "index") {
-	  /* 	        window.location.replace("index.jsp?domain="+res[1]);
-	   */         window.location.replace("index.jsp");   
+	  	        window.location.replace("index.jsp?domain="+domain);
+	          // window.location.replace("index.jsp");   
 	          }else if($.trim(data) == "home") {
 	          	alert("Wrong username or password..Try again...");
-	  	        window.location.replace("index.jsp");
+	  	        window.location.replace("index.jsp?domain="+domain);
 	          }
 	  	  }
 	      });
@@ -158,7 +178,6 @@ footer {
 
 
 </head>
-<body>
 
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
@@ -168,7 +187,8 @@ footer {
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">DS Job Portal</a>
+				<a class="navbar-brand" href="#"><img style="background-color:white;color:white;"alt="" src="dsjobportal1-final_03.png" />
+				</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<!--       <ul class="nav navbar-nav">
@@ -180,8 +200,8 @@ footer {
  -->
 				<ul class="nav navbar-nav navbar-right">
 					<li><button type="button"
-							class="btn btn-success navbar-btn btn-info" id="myBtn">
-							<span class="glyphicon glyphicon-log-in"></span> Login/Register
+							class="btn btn-secondary navbar-btn" id="myBtn">
+							<span ></span> Login/Register
 						</button></li>
 				</ul>
 			</div>
@@ -191,11 +211,11 @@ footer {
 	<div class="jumbotron">
 		<div class="container text-center">
 			<div class="wpb_wrapper">
-				<div class="wpb_raw_code wpb_content_element wpb_raw_html">
+<!-- 				<div class="wpb_raw_code wpb_content_element wpb_raw_html">
 					<div class="wpb_wrapper">
 					</div>
 				</div>
-				<div class="wpb_text_column wpb_content_element ">
+ -->				<div class="wpb_text_column wpb_content_element ">
 					<div class="wpb_wrapper">
 						<h2 class="title" style="text-align: center;">
 							<span style="color: #ffffff;">BEST CANDIDATE MATCH FOR THE
@@ -207,28 +227,25 @@ footer {
 						</h5>
 					</div>
 				</div>
-				<div class="vc_empty_space" style="height: 32px">
-					<span class="vc_empty_space_inner"></span>
-				</div>
 
 			</div>
 			<br>
 
 			<div class="container-fluid bg-3 text-center">
-				<div class="row">
-					<div class="col-sm-6">
+				<div class="row" >
+					<div class="col-sm-6" >
 						<!--       <p>Some text..</p>
  -->
 						<a href="" data-toggle="modal" data-target="#myModal">
-						<img src="seekers.jpg" class="img-responsive" style="width: 100%"
+						<img src="jobseeker.png" class="img-responsive" style="width: 100% ;height: 100%;" 
 							alt="Image"></a>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-6" >
 						<!--       <p>Some text..</p>
  -->
 						<a href="" data-toggle="modal" data-target="#myModal">
-							<img src="employers.jpg" class="img-responsive"
-							style="width: 100%" alt="Image">
+							<img src="employers.png" class="img-responsive"
+							 style="width: 100% ;height: 100%;" alt="Image">
 						</a>
 					</div>
 				</div>
@@ -406,36 +423,13 @@ footer {
 
 
 		<footer class="container-fluid text-center">
-			<nav class="navbar navbar-inverse">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target="#myNavbar">
-							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-					</div>
-					<div class="collapse navbar-collapse" id="myNavbar">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Terms</a></li>
-							<li><a href="#">Disclaimer</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">About</a></li>
-							<li><a href="#">Contact</a></li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-						</ul>
-					</div>
-				</div>
-			</nav>
-
-			<p>
-				<small style="color: white;">© Copyright 2020. All Rights
-					Reserved.<!-- <a href="#" style="color:white;">UPETA.com</a> -->
-				</small> <br> <small style="color: white;">Powered by
-					DharmaSena</small> <br> <small style="color: white;">Manava
-					Seva Madhava Seva </small> <br>
+				<img  src="Dharmasena.png" />
+<br>
+         <small style="color: white;"><img alt="" src="dsjobportal1-final_57.png" /></small> <br>
+				<small style="color: white;"><img alt="" src="dsjobportal1-final_62.png" />
+				</small> <small style="color: white;  font-weight: bold;
+				"><img alt="" src="dsjobportal1-final_63.png" /></small> 
+				
 			</p>
 		</footer>
-</body>
-</html>
+</div></html>

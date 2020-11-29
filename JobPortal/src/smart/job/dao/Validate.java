@@ -14,7 +14,8 @@ public class Validate {
             psrole.setString(2, pass);
             ResultSet rsrole =psrole.executeQuery();
             while(rsrole.next()) {
-            String role = rsrole.getString("role");System.out.println("role"+role);
+            String role = rsrole.getString("role");
+            System.out.println("role"+role);
             String superadmin = new String("admin@sreyo.com");
             String admin = new String("admin");
             if(role.equals(superadmin)) {

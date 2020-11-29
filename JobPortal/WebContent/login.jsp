@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
 <head>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link
@@ -85,14 +85,14 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 
 </script>
 
-<!------ Include the above in your HEAD tag ---------->
+---- Include the above in your HEAD tag --------
 
 </head>
 <body>
 	<div class="wrapper">
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
-				<!-- Brand and toggle get grouped for better mobile display -->
+				Brand and toggle get grouped for better mobile display
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navigation">
@@ -104,13 +104,13 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 				</a>
 			</div>
 
-			<!-- Collect the nav links, forms, and other content for toggling -->
+			Collect the nav links, forms, and other content for toggling
 			<div class="collapse navbar-collapse" id="navigation">
 				<ul class="nav navbar-nav navbar-right">
-					<!--                 <li><a href="#">About</a></li>
+					                <li><a href="#">About</a></li>
                <li><a href="#">Features</a></li>
--->
-					<!-- Trigger the modal with a button -->
+
+					Trigger the modal with a button
 
 					<li><button type="button"
 							class="btn btn-success navbar-btn btn-info" id="myBtn">Sign
@@ -120,7 +120,7 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 				<div class="modal fade" id="myModal" role="dialog">
 					<div class="modal-dialog modal-sm ">
 
-						<!-- Modal content-->
+						Modal content
 						<div class="modal-content">
 							<div class="modal-header modal-size" style="padding: 35px 35px;">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -152,11 +152,11 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 								</form>
 							</div>
 							<div class="modal-footer">
-								<!-- 			          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
--->
-								<!-- 			          <p>Not a member? <a href="#">Sign Up</a></p>
+											          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+
+											          <p>Not a member? <a href="#">Sign Up</a></p>
 		          <p>Forgot <a href="#">Password?</a></p>
--->
+
 							</div>
 						</div>
 
@@ -177,7 +177,7 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 							<div class="panel panel-default">
 								<div class="panel-body">
 
-									<!-------------------------------------------------  Registration Modal ------------------------------------------------------->
+									-----------------------------------------------  Registration Modal -----------------------------------------------------
 
 									<div class="modal fade" id="modalRegisterForm" tabindex="-1"
 										role="dialog" aria-labelledby="myModalLabel"
@@ -296,16 +296,16 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 									Sign UP SMART JobBoard </a>
 						</span>
 					</div>
-					<!-------------------------------------------------------- End Modal ------------------------------------------------------->
+					------------------------------------------------------ End Modal -----------------------------------------------------
 
-					<!--                             <form action="#" role="form">
+					                            <form action="#" role="form">
                                    <input type="email" class="form-control" placeholder="Email Address" required>
                                    <span class="input-group-btn">
                                      <button class="btn btn-success btn-circle" type="submit">Sign up</button>
                                    </span>                        
                                </div>
                            </form>
--->
+
                            </form>
 
 							</div>
@@ -339,8 +339,8 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 									class="glyphicon glyphicon-cloud icon text-success"></span>
 							</a>
 								<div class="media-body">
-									<!--                                   <h3 class="media-heading">Praesent porttitor urna ut enim.</h3>
--->
+									                                  <h3 class="media-heading">Praesent porttitor urna ut enim.</h3>
+
 						<p>Maecenas vitae ex iaculis, efficitur est eu, fermentum
 							quam.</p>
 					</div></li>
@@ -348,8 +348,8 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 						class="glyphicon glyphicon-lock icon text-success"></span>
 				</a>
 					<div class="media-body">
-						<!--                                   <h3 class="media-heading">Cras consequat est et elit.</h3>
--->
+						                                  <h3 class="media-heading">Cras consequat est et elit.</h3>
+
 						<p>Integer suscipit massa at tellus semper, at aliquam
 							ante bibendum.</p>
 					</div></li>
@@ -357,8 +357,8 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 						class="glyphicon glyphicon-user icon text-success"></span>
 				</a>
 					<div class="media-body">
-						<!--                                   <h3 class="media-heading">Aenean vel enim quis dui blandit.</h3>
--->
+						                                  <h3 class="media-heading">Aenean vel enim quis dui blandit.</h3>
+
 										<p>Maecenas vitae ex iaculis, efficitur est eu, fermentum
 											quam.</p>
 									</div></li>
@@ -416,4 +416,4 @@ var data     = $("#seeker_form").serialize()+"&address=" +address +"&image=" +im
 		</div>
 	</footer>
 	</div>
-</body>
+</body> -->
